@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">LoopTestDev</string>
+    <string name="title">无负荷计量回路接线检查仪</string>
+    <string name="login_title">用户登录</string>
+    <string name="user_name">用户名</string>
+    <string name="user_pwd">密码</string>
+    <string name="btn_login">登录</string>
+    <string name="baseTitle">标题</string>
+</resources>
