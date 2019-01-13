@@ -21,13 +21,15 @@ import com.puan.looptestdev.widget.CustomDialog;
 /**
  * 登录界面
  */
-public class LoginActivity extends BaseAvtivity implements View.OnClickListener{
+public class LoginActivity extends BaseAvtivity implements View.OnClickListener {
 
     private EditText et_user_name, et_user_pwd;
     private Button btn_login;
     private ImageView add_user;
     private String userName, userPwd;
     private Dialog dialog;
+    private EditText dialog_admin, dialog_pwd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +60,10 @@ public class LoginActivity extends BaseAvtivity implements View.OnClickListener{
                 userName = et_user_name.getText().toString().trim();
                 userPwd = et_user_pwd.getText().toString().trim();
 
-                if (TextUtils.isEmpty(userName)){
+                if (TextUtils.isEmpty(userName)) {
                     toast("用户名为空");
                 }
-                if (TextUtils.isEmpty(userPwd)){
+                if (TextUtils.isEmpty(userPwd)) {
                     toast("密码为空");
                 }
             }
@@ -75,16 +77,18 @@ public class LoginActivity extends BaseAvtivity implements View.OnClickListener{
         add_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               showDialog();
+                showDialog();
             }
         });
     }
 
     //点击按钮，弹出圆角对话框
     public void showDialog() {
-        dialog = new Dialog(this,R.style.dialog);
+        dialog = new Dialog(this, R.style.dialog);
         Window window = dialog.getWindow();
         View contentView = this.getLayoutInflater().inflate(R.layout.layout_dialog, null);
+        dialog_admin = contentView.findViewById(R.id.et_admin_custom_dialog);
+        dialog_pwd = contentView.findViewById(R.id.et_password_custom_dialog);
         TextView tv_title = contentView.findViewById(R.id.tv_title_custom_dialog);
         Button tv_cancel = contentView.findViewById(R.id.btn_negative_custom_dialog);
         Button tv_positive = contentView.findViewById(R.id.btn_positive_custom_dialog);
@@ -97,15 +101,26 @@ public class LoginActivity extends BaseAvtivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        String str_admin = dialog_admin.getText().toString().trim();
+        String str_password = dialog_pwd.getText().toString().trim();
         switch (v.getId()) {
             case R.id.btn_negative_custom_dialog:
                 dialog.dismiss();
                 break;
             case R.id.btn_positive_custom_dialog:
-                Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                startActivity(intent);
-                Toast.makeText(this,"确定",Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                if (TextUtils.isEmpty(str_admin)) {
+                    toast("请输入管理员账号");
+                }
+                if (TextUtils.isEmpty(str_password)) {
+                    toast("请输入密码");
+                }
+                if (TextUtils.equals(str_admin, "admin") && TextUtils.equals(str_password, "123456")) {
+                    Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                    startActivity(intent);
+                    dialog.dismiss();
+                } else {
+                    toast("账号或者密码错误");
+                }
                 break;
         }
     }
