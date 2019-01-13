@@ -8,6 +8,7 @@ import com.puan.looptestdev.R;
 
 /**
  * Created by kiros on 2019/1/2.
+ * 注册界面
  */
 
 public class AdminActivity extends BaseAvtivity{
