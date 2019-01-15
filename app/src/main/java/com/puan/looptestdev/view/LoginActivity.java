@@ -16,7 +16,12 @@ import android.widget.Toast;
 
 import com.puan.looptestdev.BaseAvtivity;
 import com.puan.looptestdev.R;
+import com.puan.looptestdev.db.DbUtil;
+import com.puan.looptestdev.db.UserHelper;
+import com.puan.looptestdev.entity.User;
 import com.puan.looptestdev.widget.CustomDialog;
+
+import java.util.List;
 
 /**
  * 登录界面
@@ -29,6 +34,7 @@ public class LoginActivity extends BaseAvtivity implements View.OnClickListener 
     private String userName, userPwd;
     private Dialog dialog;
     private EditText dialog_admin, dialog_pwd;
+    private UserHelper userHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,14 @@ public class LoginActivity extends BaseAvtivity implements View.OnClickListener 
         initView();
         login();
         addUser();
+
+        userHelper = DbUtil.getDriverHelper();
+
+        List<User> users = userHelper.queryAll();
+
+        for (User user : users){
+            Log.d("user", user.getPhone());
+        }
     }
 
     /**
