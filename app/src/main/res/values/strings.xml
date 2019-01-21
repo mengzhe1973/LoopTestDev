@@ -10,4 +10,8 @@
     <string name="ok">确定</string>
     <string name="input_admin">请输入管理员账号</string>
     <string name="input_pwd">请输入密码</string>
+    <string name="search_devices">搜索设备</string>
+    <string name="stop_search">停止搜索</string>
+    <string name="paired_devices">已配对设备</string>
+    <string name="new_devices">未配对设备</string>
 </resources>
